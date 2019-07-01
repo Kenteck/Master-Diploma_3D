@@ -79,13 +79,19 @@ void keyboard(unsigned char key, int x, int y)
 {
 	switch (key) {
 		case 'w':
-			Cam.Move_Camera(CAMERASPEED);
+			Cam.Move_Camera_Forward(CAMERASPEED);
 			break;
 		case 's':
-			Cam.Move_Camera(-CAMERASPEED);
+			Cam.Move_Camera_Forward(-CAMERASPEED);
 			break;
 		case 27:
 			glutLeaveMainLoop();
+			break;
+		case 'a':
+			Cam.Move_Camera_Side(-CAMERASPEED);
+			break;
+		case 'd':
+			Cam.Move_Camera_Side(CAMERASPEED);
 			break;
 	}
 }
@@ -93,7 +99,7 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(900, 900);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow(argv[0]);
 	init();
@@ -103,4 +109,18 @@ int main(int argc, char** argv)
 	glutTimerFunc(20, animation, 0);
 	glutMainLoop();
 	return 0;
+}
+
+void Draw_Grid()
+{
+	for (int i = -400; i <= 400; i += 10)
+	{
+		glBegin(GL_LINES);
+		glColor3f(0.5f, 0.5f, 0.5f);
+		glVertex3f(-500, -20, i);
+		glVertex3f(500, -20, i);
+		glVertex3f(i, -20, -500);
+		glVertex3f(i, -20, 500);
+		glEnd();
+	}
 }
