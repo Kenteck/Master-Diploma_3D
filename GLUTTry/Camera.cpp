@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 void Camera::Position_Camera(float pos_x,  float pos_y,  float pos_z,
 							 float view_x, float view_y, float view_z,
 							 float up_x,   float up_y,   float up_z)
@@ -38,8 +39,8 @@ void Camera::RotateView(float speed)
 {
 	Vector3f Vector = mView - mPos;
 
-	mView.z = (float)(mPos.z + sin(speed) * Vector.x + cos(speed) * Vector.z);
 	mView.x = (float)(mPos.x + cos(speed) * Vector.x - sin(speed) * Vector.z);
+	mView.z = (float)(mPos.z + sin(speed) * Vector.x + cos(speed) * Vector.z);
 }
 
 void Camera::Mouse_Move(int Width, int Height) 
@@ -61,6 +62,17 @@ void Camera::Mouse_Move(int Width, int Height)
 	angle_y = (float)((mid_x - mousePos.x)) / 500;
 	angle_z = (float)((mid_y - mousePos.y)) / 500;
 
+	if (arc) {
+		Vector3f Vector = mView - mPos;
+		
+		mPos.y += angle_z * 4;
+		mPos.x = (float)(cos(-angle_y) * Vector.x - sin(-angle_y) * Vector.z);
+		mPos.z = (float)(sin(-angle_y) * Vector.x + cos(-angle_y) * Vector.z);
+		
+		arc = false;
+		
+		return;
+	}
 	mView.y += angle_z * 4;
 
 	if ((mView.y - mPos.y) > 8)  mView.y = mPos.y + 8;

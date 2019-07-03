@@ -6,6 +6,7 @@ static int year = 0, day = 0, yearMoon = 0;
 static bool pos = 0;
 
 
+
 Camera Cam;
 
 
@@ -84,16 +85,22 @@ void keyboard(unsigned char key, int x, int y)
 		case 's':
 			Cam.Move_Camera_Forward(-CAMERASPEED);
 			break;
-		case 27:
-			glutLeaveMainLoop();
+		case 'd':
+			Cam.Move_Camera_Side(CAMERASPEED);
 			break;
 		case 'a':
 			Cam.Move_Camera_Side(-CAMERASPEED);
 			break;
-		case 'd':
-			Cam.Move_Camera_Side(CAMERASPEED);
+		case 27:
+			glutLeaveMainLoop();
 			break;
 	}
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	if ((button == GLUT_LEFT_BUTTON) && state == GLUT_DOWN) 
+		arc = true;
 }
 int main(int argc, char** argv)
 {

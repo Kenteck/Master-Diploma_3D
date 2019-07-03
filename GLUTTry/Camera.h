@@ -1,7 +1,6 @@
 #pragma once
 
 #define CAMERASPEED 0.05f
-
 typedef struct Vector3f
 {
 	float x, y, z;
