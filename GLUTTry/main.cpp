@@ -5,7 +5,7 @@ using namespace std;
 static int year = 0, day = 0, yearMoon = 0;
 static bool pos = 0;
 
-
+extern bool arc = false;
 
 Camera Cam;
 
@@ -91,17 +91,15 @@ void keyboard(unsigned char key, int x, int y)
 		case 'a':
 			Cam.Move_Camera_Side(-CAMERASPEED);
 			break;
+		case 'r':
+			arc = !arc;
+			break;
 		case 27:
 			glutLeaveMainLoop();
 			break;
 	}
 }
 
-void mouse(int button, int state, int x, int y)
-{
-	if ((button == GLUT_LEFT_BUTTON) && state == GLUT_DOWN) 
-		arc = true;
-}
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);

@@ -63,13 +63,13 @@ void Camera::Mouse_Move(int Width, int Height)
 	angle_z = (float)((mid_y - mousePos.y)) / 500;
 
 	if (arc) {
-		Vector3f Vector = mView - mPos;
+		Vector3f Vector = mPos - mView;
 		
-		mPos.y += angle_z * 4;
-		mPos.x = (float)(cos(-angle_y) * Vector.x - sin(-angle_y) * Vector.z);
-		mPos.z = (float)(sin(-angle_y) * Vector.x + cos(-angle_y) * Vector.z);
+		mPos.y = (float)(sin(-angle_z) * Vector.z + cos(-angle_z) * Vector.y);
+		mPos.x = (float)(mView.x + cos(-angle_y) * Vector.x - sin(-angle_y) * Vector.z);
+		mPos.z = (float)(mView.z + sin(-angle_y) * Vector.x + cos(-angle_y) * Vector.z);
 		
-		arc = false;
+		//arc = false;
 		
 		return;
 	}

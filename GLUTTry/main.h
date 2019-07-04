@@ -5,6 +5,6 @@
 #include <iostream>
 #include "Camera.h"
 
-extern bool arc = false; // dat shit creates trouble, fix it
+extern bool arc; // dat shit creates trouble, fix it
 
 void Draw_Grid();
